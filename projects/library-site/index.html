@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Library Project</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <!-- HEADER / NAVBAR -->
+    <header>
+      <nav>
+        <h1>Library</h1>
+        <ul>
+          <li><a href="#about-anchor">About</a></li>
+          <li><a href="#books-anchor">Books</a></li>
+          <li><a href="#contact-anchor">Contact</a></li>
+          <a href="#books-anchor" class="cta-button">See Books</a>
+        </ul>
+      </nav>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main id="maincontent">
+      <!-- HERO SECTION -->
+      <section id="hero">
+        <h2>Welcome to the Library 📚</h2>
+        <p>Explore and browse a collection of books.</p>
+        <a href="#books-anchor" class="cta-button">Explore Books</a>
+      </section>
+
+      <!-- ABOUT SECTION -->
+      <section id="about">
+        <div class="anchor-offset" id="about-anchor"></div>
+        <h2>About This Library</h2>
+        <p>Information about the library project goes here.</p>
+      </section>
+
+      <!-- BOOKS SECTION -->
+      <section id="books">
+        <div class="anchor-offset" id="books-anchor"></div>
+        <h2>Library Collection</h2>
+
+        <!-- FILTER -->
+        <div class="filter-container">
+          <label for="genre-filter">Filter by Genre:</label>
+          <select id="genre-filter">
+            <option value="all">All</option>
+          </select>
+        </div>
+
+        <!-- BOOK GRID -->
+        <div class="book-grid" id="book-grid">
+          <!-- JS will populate .book-card elements here -->
+        </div>
+      </section>
+
+      <!-- CONTACT SECTION -->
+      <section id="contact">
+        <div class="anchor-offset" id="contact-anchor"></div>
+        <h2>Contact</h2>
+        <p>Placeholder contact info.</p>
+      </section>
+    </main>
+
+    <!-- CART SIDEBAR -->
+    <aside id="cart" class="cart">
+      <button id="close-cart">&times;</button>
+      <h3>Your Cart</h3>
+      <ul id="cart-items"></ul>
+      <p>Total: $<span id="cart-total">0.00</span></p>
+      <button id="checkout-btn">Checkout</button>
+    </aside>
+    <button id="cart-toggle" class="cart-toggle">Cart 🛒</button>
+
+    <footer>
+      <p>© 2025 Library Project</p>
+    </footer>
+
+    <script src="script.js"></script>
+  </body>
+</html>
