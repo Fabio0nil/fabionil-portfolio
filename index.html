@@ -1,112 +1,102 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Fábio O'NIL — Portfolio</title>
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <!-- HEADER / NAVBAR -->
+    <!-- Skip Link -->
+    <a class="skip-link" href="#maincontent">Skip to content</a>
+
+    <!-- HEADER -->
     <header>
-      <nav>
-        <h1>Fábio O'NIL</h1>
-        <ul>
-          <li><a href="#about-anchor">About</a></li>
-          <li><a href="#projects-anchor">Projects</a></li>
-          <li><a href="#contact-anchor">Contact</a></li>
+      <nav class="navbar">
+        <h1 class="logo">Fábio O'NIL</h1>
+        <ul class="nav-links">
+          <li><a href="#about">About</a></li>
+          <li><a href="#projects">Projects</a></li>
+          <li><a href="#contact">Contact</a></li>
+          <li><a href="#projects" class="cta-button">See My Projects</a></li>
         </ul>
-        <a href="#projects-anchor" class="cta-button hero-cta"
-          >See My Projects</a
-        >
       </nav>
     </header>
-
-    <a class="skip-link" href="#maincontent">Skip to content</a>
 
     <!-- MAIN CONTENT -->
     <main id="maincontent">
       <!-- HERO SECTION -->
-      <section id="hero">
-        <h2 class="hero-fade">Hi, I'm Fábio O'NIL 👋</h2>
-        <p class="hero-fade">
-          Front-End Developer from Indaiatuba, SP. I build responsive and
-          high-performance web applications using HTML, CSS, and JavaScript.
+      <section id="hero" class="hero">
+        <h2>Welcome to My Portfolio</h2>
+        <p>
+          I'm Fábio O'NIL, a passionate developer exploring both Front-End and
+          Back-End worlds. Here you'll find my latest projects and ideas that
+          reflect my journey to becoming a Full-Stack Developer.
         </p>
-        <p class="hero-fade">
-          English: Advanced | Available mornings and afternoons
-        </p>
-        <a
-          href="https://www.linkedin.com/in/fábio-o-nil-a832291b0"
-          target="_blank"
-          class="hero-fade"
-        >
-          Connect on LinkedIn
-        </a>
-        <br /><br />
-        <a href="#projects-anchor" class="cta-button hero-cta"
-          >See My Projects</a
-        >
+        <a href="#projects" class="cta-button">Explore My Work</a>
       </section>
 
       <!-- ABOUT SECTION -->
-      <section id="about">
-        <div class="anchor-offset" id="about-anchor"></div>
-        <div class="fade-in">
-          <h2>About Me</h2>
-          <p>(Details coming soon)</p>
-        </div>
+      <section id="about" class="about">
+        <h2>About Me</h2>
+        <p>
+          I'm a developer with strong foundations in HTML, CSS, and JavaScript,
+          and I'm on an exciting journey to master both Front-End and Back-End
+          development. My goal is to become a versatile Full-Stack Developer,
+          always curious and committed to building clean, efficient, and
+          scalable solutions.
+        </p>
       </section>
 
       <!-- PROJECTS SECTION -->
-      <section id="projects">
-        <div class="anchor-offset" id="projects-anchor"></div>
-        <div class="projects-container fade-in">
-          <h2>Projects</h2>
-          <ul>
-            <li>Project 1 — Coming soon</li>
-            <li>Project 2 — Coming soon</li>
-            <li>Project 3 — Coming soon</li>
-          </ul>
+      <section id="projects" class="projects">
+        <h2>Projects</h2>
+        <div class="project-grid">
+          <div class="project-card">
+            <h3>Hotel Booking Website</h3>
+            <p>
+              A responsive hotel booking site with room selection, pricing, and
+              add-to-cart functionality.
+            </p>
+            <a
+              href="projects/hotel-site/index.html"
+              class="project-link"
+              target="_blank"
+              >View Project</a
+            >
+          </div>
+
+          <div class="project-card">
+            <h3>Project 2</h3>
+            <p>Coming soon...</p>
+          </div>
+          <div class="project-card">
+            <h3>Project 3</h3>
+            <p>Coming soon...</p>
+          </div>
         </div>
       </section>
 
       <!-- CONTACT SECTION -->
-      <section id="contact">
-        <div class="anchor-offset" id="contact-anchor"></div>
-        <div class="contact-card fade-in">
-          <h2>Contact</h2>
-          <p>
-            Email:
-            <a href="mailto:F4bio.onil@gmail.com">F4bio.onil@gmail.com</a>
-          </p>
-          <p>Phone: <a href="tel:+5519997073832">+55 (19) 99707-3832</a></p>
-        </div>
+      <section id="contact" class="contact">
+        <h2>Contact</h2>
+        <p>
+          Email: <a href="mailto:F4bio.onil@gmail.com">F4bio.onil@gmail.com</a>
+        </p>
+        <p>Phone: <a href="tel:+5519997073832">+55 (19) 99707-3832</a></p>
+        <p>
+          <a
+            href="https://www.linkedin.com/in/fábio-o-nil-a832291b0"
+            target="_blank"
+            >Connect on LinkedIn</a
+          >
+        </p>
       </section>
     </main>
 
     <!-- FOOTER -->
     <footer>
-      <p>© 2025 Fábio Onil</p>
+      <p>© 2025 Fábio O'NIL</p>
     </footer>
-
-    <!-- JS -->
-    <script>
-      document.addEventListener("DOMContentLoaded", () => {
-        const faders = document.querySelectorAll(".fade-in");
-
-        const appearOptions = { threshold: 0.1 };
-
-        const appearOnScroll = new IntersectionObserver((entries, observer) => {
-          entries.forEach((entry) => {
-            if (!entry.isIntersecting) return;
-            entry.target.classList.add("visible");
-            observer.unobserve(entry.target);
-          });
-        }, appearOptions);
-
-        faders.forEach((fader) => appearOnScroll.observe(fader));
-      });
-    </script>
   </body>
 </html>
