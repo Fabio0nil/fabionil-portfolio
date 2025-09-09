@@ -1,0 +1,45 @@
+/* ===== Header / Navbar ===== */
+header {
+  background: #1f1f1f;
+  padding: 20px 40px;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logo {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #a64dff; /* dark purple accent */
+}
+
+.nav-links {
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links a {
+  color: #ffffff;
+  font-weight: 500;
+}
+
+.nav-links a:hover {
+  color: #00bfa6; /* teal hover */
+}
+
+/* ===== CTA Button ===== */
+.cta-button {
+  background: #00bfa6;
+  color: #121212;
+  padding: 10px 20px;
+  border-radius: 4px;
+  font-weight: bold;
+  transition: background 0.3s;
+}
+.cta-button:hover {
+  background: #a64dff; /* dark purple on hover */
+  color: #ffffff;
+}

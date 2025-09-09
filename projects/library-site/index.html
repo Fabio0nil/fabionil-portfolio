@@ -3,63 +3,43 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Library Project</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Library Booking Style</title>
+    <link rel="stylesheet" href="style-common.css" />
+    <link rel="stylesheet" href="style-library.css" />
   </head>
   <body>
-    <!-- HEADER / NAVBAR -->
+    <!-- HEADER -->
     <header>
-      <nav>
-        <h1>Library</h1>
-        <ul>
-          <li><a href="#about-anchor">About</a></li>
-          <li><a href="#books-anchor">Books</a></li>
-          <li><a href="#contact-anchor">Contact</a></li>
-          <a href="#books-anchor" class="cta-button">See Books</a>
-        </ul>
-      </nav>
+      <div class="header-container">
+        <h1 class="logo">📚 Library</h1>
+        <input
+          type="text"
+          id="search-bar"
+          placeholder="Search books by title or author..."
+        />
+        <button id="cart-toggle" class="cart-toggle">🛒 Cart</button>
+      </div>
     </header>
 
-    <!-- MAIN CONTENT -->
-    <main id="maincontent">
-      <!-- HERO SECTION -->
-      <section id="hero">
-        <h2>Welcome to the Library 📚</h2>
-        <p>Explore and browse a collection of books.</p>
-        <a href="#books-anchor" class="cta-button">Explore Books</a>
-      </section>
+    <!-- MAIN LAYOUT -->
+    <main class="main-layout">
+      <!-- SIDEBAR FILTER -->
+      <aside class="filter-sidebar">
+        <h3>Filters</h3>
+        <label for="genre-filter">Genre:</label>
+        <select id="genre-filter">
+          <option value="all">All</option>
+        </select>
+        <label for="price-filter">Max Price:</label>
+        <input type="number" id="price-filter" placeholder="e.g. 20" />
+      </aside>
 
-      <!-- ABOUT SECTION -->
-      <section id="about">
-        <div class="anchor-offset" id="about-anchor"></div>
-        <h2>About This Library</h2>
-        <p>Information about the library project goes here.</p>
-      </section>
-
-      <!-- BOOKS SECTION -->
-      <section id="books">
-        <div class="anchor-offset" id="books-anchor"></div>
-        <h2>Library Collection</h2>
-
-        <!-- FILTER -->
-        <div class="filter-container">
-          <label for="genre-filter">Filter by Genre:</label>
-          <select id="genre-filter">
-            <option value="all">All</option>
-          </select>
-        </div>
-
-        <!-- BOOK GRID -->
+      <!-- BOOK GRID -->
+      <section class="book-section">
+        <h2>Available Books</h2>
         <div class="book-grid" id="book-grid">
-          <!-- JS will populate .book-card elements here -->
+          <!-- Books will be injected by JS -->
         </div>
-      </section>
-
-      <!-- CONTACT SECTION -->
-      <section id="contact">
-        <div class="anchor-offset" id="contact-anchor"></div>
-        <h2>Contact</h2>
-        <p>Placeholder contact info.</p>
       </section>
     </main>
 
@@ -69,10 +49,10 @@
       <h3>Your Cart</h3>
       <ul id="cart-items"></ul>
       <p>Total: $<span id="cart-total">0.00</span></p>
-      <button id="checkout-btn">Checkout</button>
+      <button id="checkout-btn">Go to Checkout</button>
     </aside>
-    <button id="cart-toggle" class="cart-toggle">Cart 🛒</button>
 
+    <!-- FOOTER -->
     <footer>
       <p>© 2025 Library Project</p>
     </footer>

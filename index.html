@@ -1,27 +1,33 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Fábio O'NIL — Portfolio</title>
-    <link rel="stylesheet" href="style.css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Fábio O'nil — Portfolio</title>
+
+    <!-- CSS Modular -->
+    <link rel="stylesheet" href="styles/global.css" />
+    <link rel="stylesheet" href="styles/hero.css" />
+    <link rel="stylesheet" href="styles/about.css" />
+    <link rel="stylesheet" href="styles/projects.css" />
+    <link rel="stylesheet" href="styles/contact.css" />
+    <link rel="stylesheet" href="styles/footer.css" />
   </head>
   <body>
-    <!-- Skip Link -->
-    <a class="skip-link" href="#maincontent">Skip to content</a>
-
-    <!-- HEADER -->
+    <!-- HEADER / NAVBAR -->
     <header>
       <nav class="navbar">
-        <h1 class="logo">Fábio O'NIL</h1>
+        <h1 class="logo">Fábio O'nil</h1>
         <ul class="nav-links">
-          <li><a href="#about">About</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li><a href="#projects" class="cta-button">See My Projects</a></li>
+          <li><a href="#about-anchor">About</a></li>
+          <li><a href="#projects-anchor">Projects</a></li>
+          <li><a href="#contact-anchor">Contact</a></li>
+          <a href="#projects-anchor" class="cta-button">See My Projects</a>
         </ul>
       </nav>
     </header>
+
+    <a class="skip-link" href="#maincontent">Skip to content</a>
 
     <!-- MAIN CONTENT -->
     <main id="maincontent">
@@ -29,75 +35,45 @@
       <section id="hero" class="hero">
         <h2>Welcome to My Portfolio</h2>
         <p>
-          I'm Fábio O'NIL, a passionate developer exploring both Front-End and
-          Back-End worlds. Here you'll find my latest projects and ideas that
-          reflect my journey to becoming a Full-Stack Developer.
+          Here you can explore my projects and experience in web development.
         </p>
-        <a href="#projects" class="cta-button">Explore My Work</a>
+        <a href="#projects-anchor" class="cta-button">Explore Projects</a>
       </section>
 
       <!-- ABOUT SECTION -->
       <section id="about" class="about">
+        <div class="anchor-offset" id="about-anchor"></div>
         <h2>About Me</h2>
         <p>
-          I'm a developer with strong foundations in HTML, CSS, and JavaScript,
-          and I'm on an exciting journey to master both Front-End and Back-End
-          development. My goal is to become a versatile Full-Stack Developer,
-          always curious and committed to building clean, efficient, and
-          scalable solutions.
+          I’m a Front-End Developer passionate about creating responsive,
+          high-performance web applications. I enjoy working with both front-end
+          and back-end technologies to become a fullstack developer.
         </p>
       </section>
 
       <!-- PROJECTS SECTION -->
       <section id="projects" class="projects">
+        <div class="anchor-offset" id="projects-anchor"></div>
         <h2>Projects</h2>
         <div class="project-grid">
-          <div class="project-card">
-            <h3>Library Catalog</h3>
-            <p>
-              An interactive library web app where users can browse books, view
-              details, and add them to a cart for borrowing or purchase. Built
-              with HTML, CSS, JavaScript, and remote API integration.
-            </p>
-            <a
-              href="projects/library-site/index.html"
-              class="project-link"
-              target="_blank"
-              >View Project</a
-            >
-          </div>
-
-          <div class="project-card">
-            <h3>Project 2</h3>
-            <p>Coming soon...</p>
-          </div>
-          <div class="project-card">
-            <h3>Project 3</h3>
-            <p>Coming soon...</p>
-          </div>
+          <!-- Project cards populated dynamically -->
         </div>
       </section>
 
       <!-- CONTACT SECTION -->
       <section id="contact" class="contact">
+        <div class="anchor-offset" id="contact-anchor"></div>
         <h2>Contact</h2>
-        <p>
-          Email: <a href="mailto:F4bio.onil@gmail.com">F4bio.onil@gmail.com</a>
-        </p>
-        <p>Phone: <a href="tel:+5519997073832">+55 (19) 99707-3832</a></p>
-        <p>
-          <a
-            href="https://www.linkedin.com/in/fábio-o-nil-a832291b0"
-            target="_blank"
-            >Connect on LinkedIn</a
-          >
-        </p>
+        <p>Placeholder contact info</p>
       </section>
     </main>
 
     <!-- FOOTER -->
     <footer>
-      <p>© 2025 Fábio O'NIL</p>
+      <p>© 2025 Fábio Onil</p>
     </footer>
+
+    <!-- JS -->
+    <script src="script.js"></script>
   </body>
 </html>

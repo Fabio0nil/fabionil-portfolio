@@ -1,0 +1,25 @@
+/* ===== Contact Section ===== */
+.contact {
+  text-align: center;
+  padding: 80px 20px;
+  background: #121212;
+}
+
+.contact h2 {
+  font-size: 2rem;
+  color: #a64dff;
+  margin-bottom: 20px;
+}
+
+.contact p {
+  color: #e0e0e0;
+  margin: 10px 0;
+}
+
+.contact a {
+  color: #00bfa6;
+}
+
+.contact a:hover {
+  color: #a64dff;
+}
