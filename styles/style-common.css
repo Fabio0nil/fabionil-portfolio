@@ -31,9 +31,57 @@ ul {
   padding: 8px 16px;
   z-index: 100;
   transition: top 0.3s;
+  border-radius: 0 0 5px 0;
 }
 .skip-link:focus {
   top: 10px;
+}
+
+/* ===== Accessibility Improvements ===== */
+*:focus {
+  outline: 2px solid #00bfa6;
+  outline-offset: 2px;
+}
+
+button:focus,
+input:focus,
+textarea:focus,
+select:focus {
+  outline: 2px solid #00bfa6;
+  outline-offset: 2px;
+}
+
+/* Screen reader only content */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .cta-button {
+    border: 2px solid #ffffff;
+  }
+
+  .project-card {
+    border: 2px solid #ffffff;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
 
 /* ===== Header / Navbar ===== */

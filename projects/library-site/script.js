@@ -1,4 +1,4 @@
-// Sample books array
+// Expanded books array with more variety
 const books = [
   {
     id: 1,
@@ -45,6 +45,69 @@ const books = [
     genre: "Romance",
     quantity: 1,
   },
+  {
+    id: 6,
+    title: "Dune",
+    author: "Frank Herbert",
+    price: 15.99,
+    image: "images/dune.jpg",
+    genre: "Science Fiction",
+    quantity: 1,
+  },
+  {
+    id: 7,
+    title: "The Catcher in the Rye",
+    author: "J.D. Salinger",
+    price: 13.99,
+    image: "images/catcher.jpg",
+    genre: "Classic",
+    quantity: 1,
+  },
+  {
+    id: 8,
+    title: "Harry Potter and the Sorcerer's Stone",
+    author: "J.K. Rowling",
+    price: 16.99,
+    image: "images/harry-potter.jpg",
+    genre: "Fantasy",
+    quantity: 1,
+  },
+  {
+    id: 9,
+    title: "The Handmaid's Tale",
+    author: "Margaret Atwood",
+    price: 12.99,
+    image: "images/handmaid.jpg",
+    genre: "Dystopian",
+    quantity: 1,
+  },
+  {
+    id: 10,
+    title: "The Alchemist",
+    author: "Paulo Coelho",
+    price: 11.99,
+    image: "images/alchemist.jpg",
+    genre: "Fiction",
+    quantity: 1,
+  },
+  {
+    id: 11,
+    title: "Sapiens",
+    author: "Yuval Noah Harari",
+    price: 18.99,
+    image: "images/sapiens.jpg",
+    genre: "Non-Fiction",
+    quantity: 1,
+  },
+  {
+    id: 12,
+    title: "The Martian",
+    author: "Andy Weir",
+    price: 14.99,
+    image: "images/martian.jpg",
+    genre: "Science Fiction",
+    quantity: 1,
+  },
 ];
 
 // Load cart from localStorage
@@ -59,6 +122,7 @@ const cartItems = document.getElementById("cart-items");
 const cartTotal = document.getElementById("cart-total");
 const checkoutBtn = document.getElementById("checkout-btn");
 const genreFilter = document.getElementById("genre-filter");
+const searchBar = document.getElementById("search-bar");
 
 // Populate genre filter
 const genres = ["all", ...new Set(books.map((book) => book.genre))];
@@ -69,9 +133,20 @@ genres.forEach((genre) => {
   genreFilter.appendChild(option);
 });
 
-// Display books
+// Display books with search and filter
 function displayBooks(filteredBooks = books) {
   bookGrid.innerHTML = "";
+
+  if (filteredBooks.length === 0) {
+    bookGrid.innerHTML = `
+      <div class="no-results">
+        <h3>No books found</h3>
+        <p>Try adjusting your search or filter criteria</p>
+      </div>
+    `;
+    return;
+  }
+
   filteredBooks.forEach((book) => {
     const card = document.createElement("div");
     card.className = "book-card";
@@ -80,6 +155,7 @@ function displayBooks(filteredBooks = books) {
       <div class="book-info">
         <h3>${book.title}</h3>
         <p>by ${book.author}</p>
+        <p class="genre">${book.genre}</p>
         <p class="price">$${book.price.toFixed(2)}</p>
         <button class="add-to-cart" data-id="${book.id}">Add to Cart</button>
       </div>
@@ -94,12 +170,33 @@ function displayBooks(filteredBooks = books) {
 // Initial display
 displayBooks();
 
-// Filter by genre
-genreFilter.addEventListener("change", (e) => {
-  const selected = e.target.value;
-  if (selected === "all") displayBooks();
-  else displayBooks(books.filter((book) => book.genre === selected));
-});
+// Search and filter functionality
+function filterBooks() {
+  const searchTerm = searchBar.value.toLowerCase().trim();
+  const selectedGenre = genreFilter.value;
+  const maxPrice =
+    parseFloat(document.getElementById("price-filter").value) || Infinity;
+
+  let filteredBooks = books.filter((book) => {
+    const matchesSearch =
+      !searchTerm ||
+      book.title.toLowerCase().includes(searchTerm) ||
+      book.author.toLowerCase().includes(searchTerm);
+
+    const matchesGenre =
+      selectedGenre === "all" || book.genre === selectedGenre;
+    const matchesPrice = book.price <= maxPrice;
+
+    return matchesSearch && matchesGenre && matchesPrice;
+  });
+
+  displayBooks(filteredBooks);
+}
+
+// Event listeners for search and filters
+searchBar.addEventListener("input", filterBooks);
+genreFilter.addEventListener("change", filterBooks);
+document.getElementById("price-filter").addEventListener("input", filterBooks);
 
 // Toggle cart sidebar
 cartToggle.addEventListener("click", () =>

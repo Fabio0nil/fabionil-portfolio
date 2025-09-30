@@ -2,7 +2,7 @@
 .DS_Store
 Thumbs.db
 
-# Node (for later if we add npm)
+# Node (for later if i add npm)
 node_modules/
 
 # Build files (future-proof)

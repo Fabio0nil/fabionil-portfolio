@@ -34,7 +34,7 @@ const projectsData = [
     title: "Library Project",
     description:
       "A dynamic library with books browsing and add-to-cart features.",
-    link: "projects/library/index.html",
+    link: "projects/library-site/library.html",
     image: "projects/library/images/book1.jpg",
   },
   {
@@ -96,3 +96,79 @@ const highlightNav = () => {
 
 window.addEventListener("scroll", highlightNav);
 window.addEventListener("load", highlightNav);
+
+// ===== Contact Form Handling =====
+const contactForm = document.getElementById("contact-form");
+if (contactForm) {
+  contactForm.addEventListener("submit", (e) => {
+    e.preventDefault();
+
+    const formData = new FormData(contactForm);
+    const name = formData.get("name");
+    const email = formData.get("email");
+    const subject = formData.get("subject");
+    const message = formData.get("message");
+
+    // Basic validation
+    if (!name || !email || !subject || !message) {
+      showContactError("Please fill in all fields");
+      return;
+    }
+
+    if (!isValidEmail(email)) {
+      showContactError("Please enter a valid email address");
+      return;
+    }
+
+    // Show success message
+    showContactSuccess(
+      "Thank you for your message! I'll get back to you soon."
+    );
+    contactForm.reset();
+  });
+}
+
+function isValidEmail(email) {
+  const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+  return emailRegex.test(email);
+}
+
+function showContactError(message) {
+  showContactMessage(message, "error");
+}
+
+function showContactSuccess(message) {
+  showContactMessage(message, "success");
+}
+
+function showContactMessage(message, type) {
+  // Remove existing messages
+  const existingMessage = document.querySelector(".contact-message");
+  if (existingMessage) {
+    existingMessage.remove();
+  }
+
+  // Create new message
+  const messageDiv = document.createElement("div");
+  messageDiv.className = "contact-message";
+  messageDiv.textContent = message;
+  messageDiv.style.cssText = `
+    background: ${type === "error" ? "#ff4444" : "#00bfa6"};
+    color: white;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: center;
+    font-weight: 500;
+  `;
+
+  // Insert after form
+  contactForm.parentNode.insertBefore(messageDiv, contactForm.nextSibling);
+
+  // Auto-remove after 5 seconds
+  setTimeout(() => {
+    if (messageDiv.parentNode) {
+      messageDiv.remove();
+    }
+  }, 5000);
+}

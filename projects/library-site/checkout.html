@@ -4,14 +4,20 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Library Checkout</title>
-    <link rel="stylesheet" href="css/style-common.css" />
-    <link rel="stylesheet" href="css/style-checkout.css" />
+    <link
+      rel="stylesheet"
+      href="/projects/library-site/styles/style-library.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/projects/library-site/styles/style-checkout.css"
+    />
   </head>
   <body>
     <header>
       <nav>
         <h1>Library Checkout</h1>
-        <a href="index.html" class="cta-button">Back to Library</a>
+        <a href="library.html" class="cta-button">Back to Library</a>
       </nav>
     </header>
 
@@ -25,10 +31,33 @@
         <!-- PAYMENT FORM -->
         <form id="payment-form">
           <h3>Payment Info</h3>
-          <input type="text" placeholder="Cardholder Name" required />
-          <input type="text" placeholder="Card Number" required />
-          <input type="text" placeholder="Expiration" required />
-          <input type="text" placeholder="CVV" required />
+          <input
+            type="text"
+            name="cardName"
+            placeholder="Cardholder Name"
+            required
+          />
+          <input
+            type="text"
+            name="cardNumber"
+            placeholder="Card Number"
+            maxlength="19"
+            required
+          />
+          <input
+            type="text"
+            name="expiration"
+            placeholder="Expiration (MM/YY)"
+            maxlength="5"
+            required
+          />
+          <input
+            type="text"
+            name="cvv"
+            placeholder="CVV"
+            maxlength="3"
+            required
+          />
           <button type="submit" class="cta-button">Confirm Purchase</button>
         </form>
       </section>

@@ -57,3 +57,22 @@
 .book-info button.add-to-cart {
   margin-top: 10px;
 }
+
+.book-info .genre {
+  color: #666;
+  font-size: 0.9rem;
+  font-style: italic;
+  margin: 5px 0;
+}
+
+.no-results {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 40px;
+  color: #666;
+}
+
+.no-results h3 {
+  color: #333;
+  margin-bottom: 10px;
+}
