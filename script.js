@@ -24,39 +24,39 @@ class ScrollAnimations {
       (entries) => this.handleIntersection(entries),
       {
         threshold: 0.1,
-        rootMargin: "0px 0px -50px 0px"
+        rootMargin: "0px 0px -50px 0px",
       }
     );
 
     // Observe all elements with animation classes
     this.observeElements();
-    
+
     // Add scroll listener for navbar effects
     this.addScrollListeners();
-    
+
     // Initial check for elements already in view
     this.checkInitialElements();
   }
 
   observeElements() {
     const selectors = [
-      '.animate-on-scroll',
-      '.animate-fade-in',
-      '.animate-slide-left',
-      '.animate-slide-right',
-      '.animate-scale-up',
-      '.animate-rotate-in',
-      '.animate-bounce-in',
-      '.project-card',
-      '.contact-form',
-      '.contact-info',
-      'section h2',
-      'section p'
+      ".animate-on-scroll",
+      ".animate-fade-in",
+      ".animate-slide-left",
+      ".animate-slide-right",
+      ".animate-scale-up",
+      ".animate-rotate-in",
+      ".animate-bounce-in",
+      ".project-card",
+      ".contact-form",
+      ".contact-info",
+      "section h2",
+      "section p",
     ];
 
-    selectors.forEach(selector => {
+    selectors.forEach((selector) => {
       const elements = document.querySelectorAll(selector);
-      elements.forEach(el => {
+      elements.forEach((el) => {
         this.observer.observe(el);
         this.animatedElements.add(el);
       });
@@ -64,13 +64,13 @@ class ScrollAnimations {
   }
 
   handleIntersection(entries) {
-    entries.forEach(entry => {
+    entries.forEach((entry) => {
       if (entry.isIntersecting) {
         const element = entry.target;
-        
+
         // Add visible class with appropriate delay
         this.animateElement(element);
-        
+
         // Stop observing this element
         this.observer.unobserve(element);
       }
@@ -79,21 +79,21 @@ class ScrollAnimations {
 
   animateElement(element) {
     // Add visible class
-    element.classList.add('visible');
-    
+    element.classList.add("visible");
+
     // Special handling for project cards with stagger
-    if (element.classList.contains('project-card')) {
-      const cards = document.querySelectorAll('.project-card');
+    if (element.classList.contains("project-card")) {
+      const cards = document.querySelectorAll(".project-card");
       const index = Array.from(cards).indexOf(element);
       element.style.transitionDelay = `${index * 0.1}s`;
     }
-    
+
     // Special handling for contact form elements
-    if (element.classList.contains('contact-info')) {
-      const contactForm = document.querySelector('.contact-form');
-      if (contactForm && !contactForm.classList.contains('visible')) {
+    if (element.classList.contains("contact-info")) {
+      const contactForm = document.querySelector(".contact-form");
+      if (contactForm && !contactForm.classList.contains("visible")) {
         setTimeout(() => {
-          contactForm.classList.add('visible');
+          contactForm.classList.add("visible");
         }, 200);
       }
     }
@@ -101,17 +101,17 @@ class ScrollAnimations {
 
   addScrollListeners() {
     let ticking = false;
-    
+
     const updateNavbar = () => {
-      const navbar = document.querySelector('.navbar');
+      const navbar = document.querySelector(".navbar");
       const scrolled = window.scrollY > 50;
-      
+
       if (scrolled) {
-        navbar.classList.add('scrolled');
+        navbar.classList.add("scrolled");
       } else {
-        navbar.classList.remove('scrolled');
+        navbar.classList.remove("scrolled");
       }
-      
+
       ticking = false;
     };
 
@@ -122,15 +122,15 @@ class ScrollAnimations {
       }
     };
 
-    window.addEventListener('scroll', requestTick, { passive: true });
+    window.addEventListener("scroll", requestTick, { passive: true });
   }
 
   checkInitialElements() {
     // Check if elements are already in view on page load
-    this.animatedElements.forEach(element => {
+    this.animatedElements.forEach((element) => {
       const rect = element.getBoundingClientRect();
       const isInView = rect.top < window.innerHeight && rect.bottom > 0;
-      
+
       if (isInView) {
         this.animateElement(element);
         this.observer.unobserve(element);
@@ -152,17 +152,17 @@ const scrollAnimations = new ScrollAnimations();
 
 // ===== HERO SECTION SPECIAL ANIMATIONS =====
 const initHeroAnimations = () => {
-  const hero = document.querySelector('.hero');
+  const hero = document.querySelector(".hero");
   if (hero) {
     // Trigger hero animations immediately on load
     setTimeout(() => {
-      hero.classList.add('visible');
+      hero.classList.add("visible");
     }, 100);
   }
 };
 
 // Initialize hero animations when DOM is loaded
-document.addEventListener('DOMContentLoaded', initHeroAnimations);
+document.addEventListener("DOMContentLoaded", initHeroAnimations);
 
 // ===== Project Data (Dynamic) =====
 const projectsData = [
