@@ -147,8 +147,11 @@ class ScrollAnimations {
   }
 }
 
-// Initialize scroll animations
-const scrollAnimations = new ScrollAnimations();
+// Initialize scroll animations when DOM is loaded
+let scrollAnimations;
+document.addEventListener("DOMContentLoaded", () => {
+  scrollAnimations = new ScrollAnimations();
+});
 
 // ===== HERO SECTION SPECIAL ANIMATIONS =====
 const initHeroAnimations = () => {
@@ -171,27 +174,28 @@ const projectsData = [
     description:
       "A dynamic library with books browsing and add-to-cart features.",
     link: "projects/library-site/library.html",
-    image: "projects/library/images/book1.jpg",
+    image: "https://via.placeholder.com/300x200/00bfa6/ffffff?text=Library+Project",
   },
   {
     title: "Portfolio Project",
     description:
       "My personal portfolio showcasing front-end and fullstack skills.",
     link: "#",
-    image: "images/project-placeholder.jpg",
+    image: "https://via.placeholder.com/300x200/a64dff/ffffff?text=Portfolio",
   },
   {
     title: "Coming Soon Project",
     description: "This project will be added soon with full details.",
     link: "#",
-    image: "images/project-placeholder.jpg",
+    image: "https://via.placeholder.com/300x200/666666/ffffff?text=Coming+Soon",
   },
 ];
 
 // ===== Render Project Cards =====
-const projectGrid = document.querySelector(".project-grid");
-
 const renderProjects = () => {
+  const projectGrid = document.querySelector(".project-grid");
+  if (!projectGrid) return; // Safety check
+  
   projectsData.forEach((project, index) => {
     const card = document.createElement("div");
     card.classList.add("project-card");
@@ -205,11 +209,14 @@ const renderProjects = () => {
     projectGrid.appendChild(card);
 
     // Add to scroll animations system
-    scrollAnimations.addElement(card);
+    if (typeof scrollAnimations !== 'undefined') {
+      scrollAnimations.addElement(card);
+    }
   });
 };
 
-renderProjects();
+// Render projects when DOM is loaded
+document.addEventListener("DOMContentLoaded", renderProjects);
 
 // ===== Optional: Highlight Active Nav Link on Scroll =====
 const navLinks = document.querySelectorAll(".nav-links a");
@@ -313,35 +320,37 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 // ===== Contact Form Handling =====
-const contactForm = document.getElementById("contact-form");
-if (contactForm) {
-  contactForm.addEventListener("submit", (e) => {
-    e.preventDefault();
+document.addEventListener("DOMContentLoaded", () => {
+  const contactForm = document.getElementById("contact-form");
+  if (contactForm) {
+    contactForm.addEventListener("submit", (e) => {
+      e.preventDefault();
 
-    const formData = new FormData(contactForm);
-    const name = formData.get("name");
-    const email = formData.get("email");
-    const subject = formData.get("subject");
-    const message = formData.get("message");
+      const formData = new FormData(contactForm);
+      const name = formData.get("name");
+      const email = formData.get("email");
+      const subject = formData.get("subject");
+      const message = formData.get("message");
 
-    // Basic validation
-    if (!name || !email || !subject || !message) {
-      showContactError("Please fill in all fields");
-      return;
-    }
+      // Basic validation
+      if (!name || !email || !subject || !message) {
+        showContactError("Please fill in all fields");
+        return;
+      }
 
-    if (!isValidEmail(email)) {
-      showContactError("Please enter a valid email address");
-      return;
-    }
+      if (!isValidEmail(email)) {
+        showContactError("Please enter a valid email address");
+        return;
+      }
 
-    // Show success message
-    showContactSuccess(
-      "Thank you for your message! I'll get back to you soon."
-    );
-    contactForm.reset();
-  });
-}
+      // Show success message
+      showContactSuccess(
+        "Thank you for your message! I'll get back to you soon."
+      );
+      contactForm.reset();
+    });
+  }
+});
 
 function isValidEmail(email) {
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
