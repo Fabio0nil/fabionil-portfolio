@@ -97,6 +97,78 @@ const highlightNav = () => {
 window.addEventListener("scroll", highlightNav);
 window.addEventListener("load", highlightNav);
 
+// ===== THEME TOGGLE SYSTEM =====
+class ThemeManager {
+  constructor() {
+    this.themeToggle = document.getElementById("theme-toggle");
+    this.themeIcon = this.themeToggle?.querySelector(".theme-icon");
+    this.currentTheme = this.getStoredTheme() || this.getSystemTheme();
+    
+    this.init();
+  }
+  
+  init() {
+    // Apply initial theme
+    this.applyTheme(this.currentTheme);
+    
+    // Add event listener
+    if (this.themeToggle) {
+      this.themeToggle.addEventListener("click", () => this.toggleTheme());
+    }
+    
+    // Listen for system theme changes
+    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
+      if (!this.getStoredTheme()) {
+        this.currentTheme = e.matches ? "dark" : "light";
+        this.applyTheme(this.currentTheme);
+      }
+    });
+  }
+  
+  getSystemTheme() {
+    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+  }
+  
+  getStoredTheme() {
+    return localStorage.getItem("theme");
+  }
+  
+  storeTheme(theme) {
+    localStorage.setItem("theme", theme);
+  }
+  
+  toggleTheme() {
+    this.currentTheme = this.currentTheme === "dark" ? "light" : "dark";
+    this.applyTheme(this.currentTheme);
+    this.storeTheme(this.currentTheme);
+  }
+  
+  applyTheme(theme) {
+    // Set data attribute on document
+    document.documentElement.setAttribute("data-theme", theme);
+    
+    // Update toggle button
+    if (this.themeToggle) {
+      this.themeToggle.setAttribute("data-theme", theme);
+    }
+    
+    // Update icon
+    if (this.themeIcon) {
+      this.themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
+    }
+    
+    // Update aria-label
+    if (this.themeToggle) {
+      this.themeToggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
+    }
+  }
+}
+
+// Initialize theme manager when DOM is loaded
+document.addEventListener("DOMContentLoaded", () => {
+  new ThemeManager();
+});
+
 // ===== Contact Form Handling =====
 const contactForm = document.getElementById("contact-form");
 if (contactForm) {

@@ -8,13 +8,13 @@
 body {
   font-family: "Arial", sans-serif;
   line-height: 1.6;
-  background-color: #121212; /* dark base */
-  color: #ffffff;
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
 }
 
 a {
   text-decoration: none;
-  color: #00bfa6; /* teal for links */
+  color: var(--accent-primary);
 }
 
 ul {
@@ -26,8 +26,8 @@ ul {
   position: absolute;
   top: -40px;
   left: 0;
-  background: #00bfa6;
-  color: #ffffff;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
   padding: 8px 16px;
   z-index: 100;
   transition: top 0.3s;
@@ -39,7 +39,7 @@ ul {
 
 /* ===== Accessibility Improvements ===== */
 *:focus {
-  outline: 2px solid #00bfa6;
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
@@ -47,7 +47,7 @@ button:focus,
 input:focus,
 textarea:focus,
 select:focus {
-  outline: 2px solid #00bfa6;
+  outline: 2px solid var(--accent-primary);
   outline-offset: 2px;
 }
 
@@ -86,8 +86,9 @@ select:focus {
 
 /* ===== Header / Navbar ===== */
 header {
-  background: #1f1f1f;
+  background: var(--bg-secondary);
   padding: 20px 40px;
+  border-bottom: 1px solid var(--border-color);
 }
 
 .navbar {
@@ -99,7 +100,7 @@ header {
 .logo {
   font-size: 1.5rem;
   font-weight: bold;
-  color: #a64dff; /* dark purple accent */
+  color: var(--accent-secondary);
 }
 
 .nav-links {
@@ -108,44 +109,48 @@ header {
 }
 
 .nav-links a {
-  color: #ffffff;
+  color: var(--text-primary);
   font-weight: 500;
 }
 
 .nav-links a:hover {
-  color: #00bfa6; /* teal hover */
+  color: var(--accent-primary);
 }
 
 /* ===== CTA Button ===== */
 .cta-button {
-  background: #00bfa6;
-  color: #121212;
+  background: var(--accent-primary);
+  color: var(--bg-primary);
   padding: 10px 20px;
   border-radius: 4px;
   font-weight: bold;
-  transition: background 0.3s;
+  transition: all 0.3s ease;
+  border: none;
+  cursor: pointer;
 }
 .cta-button:hover {
-  background: #a64dff; /* dark purple on hover */
-  color: #ffffff;
+  background: var(--accent-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px var(--shadow);
+  transform: translateY(-2px);
 }
 
 /* ===== Hero Section ===== */
 .hero {
   text-align: center;
   padding: 100px 20px;
-  background: #1a1a1a;
-  border-bottom: 2px solid #2e2e2e;
+  background: var(--gradient-bg);
+  border-bottom: 1px solid var(--border-color);
 }
 .hero h2 {
   font-size: 2.5rem;
-  color: #ffffff;
+  color: var(--text-primary);
   margin-bottom: 20px;
 }
 .hero p {
   max-width: 600px;
   margin: 0 auto 20px;
-  color: #cccccc;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
@@ -153,17 +158,17 @@ header {
 .about {
   text-align: center;
   padding: 80px 20px;
-  background: #121212;
+  background: var(--bg-primary);
 }
 .about h2 {
   font-size: 2rem;
-  color: #a64dff;
+  color: var(--accent-secondary);
   margin-bottom: 20px;
 }
 .about p {
   max-width: 700px;
   margin: 0 auto;
-  color: #e0e0e0;
+  color: var(--text-secondary);
   font-size: 1.1rem;
 }
 
@@ -171,11 +176,11 @@ header {
 .projects {
   text-align: center;
   padding: 80px 20px;
-  background: #1a1a1a;
+  background: var(--bg-secondary);
 }
 .projects h2 {
   font-size: 2rem;
-  color: #a64dff;
+  color: var(--accent-secondary);
   margin-bottom: 40px;
 }
 .project-grid {
@@ -186,50 +191,52 @@ header {
   margin: 0 auto;
 }
 .project-card {
-  background: #2a2a2a;
+  background: var(--bg-tertiary);
   padding: 20px;
   border-radius: 8px;
-  border: 1px solid #333333;
-  transition: transform 0.3s;
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 .project-card:hover {
   transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--shadow-hover);
 }
 .project-card h3 {
-  color: #00bfa6;
+  color: var(--accent-primary);
   margin-bottom: 10px;
 }
 .project-card p {
-  color: #cccccc;
+  color: var(--text-secondary);
 }
 
 /* ===== Contact Section ===== */
 .contact {
   text-align: center;
   padding: 80px 20px;
-  background: #121212;
+  background: var(--bg-primary);
 }
 .contact h2 {
   font-size: 2rem;
-  color: #a64dff;
+  color: var(--accent-secondary);
   margin-bottom: 20px;
 }
 .contact p {
-  color: #e0e0e0;
+  color: var(--text-secondary);
   margin: 10px 0;
 }
 .contact a {
-  color: #00bfa6;
+  color: var(--accent-primary);
 }
 .contact a:hover {
-  color: #a64dff;
+  color: var(--accent-secondary);
 }
 
 /* ===== Footer ===== */
 footer {
   text-align: center;
   padding: 20px;
-  background: #1f1f1f;
-  color: #777;
+  background: var(--bg-secondary);
+  color: var(--text-muted);
   font-size: 0.9rem;
+  border-top: 1px solid var(--border-color);
 }

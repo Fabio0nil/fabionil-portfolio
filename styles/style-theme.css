@@ -1,0 +1,291 @@
+/* ===== THEME SYSTEM ===== */
+
+/* CSS Custom Properties for Light Theme */
+:root {
+  /* Colors */
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8f9fa;
+  --bg-tertiary: #e9ecef;
+  --text-primary: #212529;
+  --text-secondary: #6c757d;
+  --text-muted: #adb5bd;
+  --accent-primary: #00bfa6;
+  --accent-secondary: #a64dff;
+  --border-color: #dee2e6;
+  --shadow: rgba(0, 0, 0, 0.1);
+  --shadow-hover: rgba(0, 0, 0, 0.15);
+  
+  /* Gradients */
+  --gradient-primary: linear-gradient(135deg, #00bfa6, #a64dff);
+  --gradient-bg: linear-gradient(135deg, #f8f9fa, #e9ecef);
+}
+
+/* Dark Theme */
+[data-theme="dark"] {
+  --bg-primary: #121212;
+  --bg-secondary: #1a1a1a;
+  --bg-tertiary: #2a2a2a;
+  --text-primary: #ffffff;
+  --text-secondary: #e0e0e0;
+  --text-muted: #cccccc;
+  --accent-primary: #00bfa6;
+  --accent-secondary: #a64dff;
+  --border-color: #333333;
+  --shadow: rgba(0, 0, 0, 0.3);
+  --shadow-hover: rgba(0, 0, 0, 0.4);
+  
+  --gradient-primary: linear-gradient(135deg, #00bfa6, #a64dff);
+  --gradient-bg: linear-gradient(135deg, #1a1a1a, #2a2a2a);
+}
+
+/* ===== THEME TOGGLE BUTTON ===== */
+.theme-toggle {
+  background: var(--bg-tertiary);
+  border: 2px solid var(--border-color);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  margin-left: 20px;
+  position: relative;
+  overflow: hidden;
+}
+
+.theme-toggle:hover {
+  background: var(--accent-primary);
+  border-color: var(--accent-primary);
+  transform: scale(1.1);
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+.theme-toggle:active {
+  transform: scale(0.95);
+}
+
+.theme-icon {
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  display: block;
+}
+
+.theme-toggle[data-theme="light"] .theme-icon {
+  content: "☀️";
+}
+
+.theme-toggle[data-theme="dark"] .theme-icon {
+  content: "🌙";
+}
+
+/* Animation for theme transition */
+.theme-toggle::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--accent-primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: all 0.3s ease;
+  z-index: -1;
+}
+
+.theme-toggle:hover::before {
+  width: 100%;
+  height: 100%;
+}
+
+/* ===== UPDATED GLOBAL STYLES WITH CSS VARIABLES ===== */
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+a {
+  color: var(--accent-primary);
+  transition: color 0.3s ease;
+}
+
+a:hover {
+  color: var(--accent-secondary);
+}
+
+/* Header */
+header {
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text-primary);
+  transition: color 0.3s ease;
+}
+
+.nav-links a:hover {
+  color: var(--accent-primary);
+}
+
+/* CTA Button */
+.cta-button {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+  transition: all 0.3s ease;
+}
+
+.cta-button:hover {
+  background: var(--accent-secondary);
+  color: var(--text-primary);
+  box-shadow: 0 4px 15px var(--shadow);
+}
+
+/* Hero Section */
+.hero {
+  background: var(--gradient-bg);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.hero h2 {
+  color: var(--text-primary);
+}
+
+.hero p {
+  color: var(--text-secondary);
+}
+
+/* About Section */
+.about {
+  background: var(--bg-primary);
+  transition: all 0.3s ease;
+}
+
+.about h2 {
+  color: var(--accent-secondary);
+}
+
+.about p {
+  color: var(--text-secondary);
+}
+
+/* Projects Section */
+.projects {
+  background: var(--bg-secondary);
+  transition: all 0.3s ease;
+}
+
+.projects h2 {
+  color: var(--accent-secondary);
+}
+
+.project-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px var(--shadow-hover);
+}
+
+.project-card h3 {
+  color: var(--accent-primary);
+}
+
+.project-card p {
+  color: var(--text-secondary);
+}
+
+/* Contact Section */
+.contact {
+  background: var(--bg-primary);
+  transition: all 0.3s ease;
+}
+
+.contact h2 {
+  color: var(--accent-secondary);
+}
+
+.contact > p {
+  color: var(--text-secondary);
+}
+
+.contact-info h3,
+.contact-form h3 {
+  color: var(--accent-primary);
+}
+
+.contact-item {
+  color: var(--text-secondary);
+}
+
+.contact-form {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+.form-group input,
+.form-group textarea {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-color);
+  color: var(--text-primary);
+  transition: all 0.3s ease;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  border-color: var(--accent-primary);
+  box-shadow: 0 0 0 2px rgba(0, 191, 166, 0.2);
+}
+
+.form-group input::placeholder,
+.form-group textarea::placeholder {
+  color: var(--text-muted);
+}
+
+/* Footer */
+footer {
+  background: var(--bg-secondary);
+  color: var(--text-muted);
+  border-top: 1px solid var(--border-color);
+  transition: all 0.3s ease;
+}
+
+/* Focus states */
+*:focus {
+  outline: 2px solid var(--accent-primary);
+  outline-offset: 2px;
+}
+
+/* Skip link */
+.skip-link {
+  background: var(--accent-primary);
+  color: var(--bg-primary);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .theme-toggle {
+    width: 45px;
+    height: 45px;
+    margin-left: 15px;
+  }
+  
+  .theme-icon {
+    font-size: 1.3rem;
+  }
+}
