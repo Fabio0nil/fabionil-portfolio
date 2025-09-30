@@ -136,20 +136,21 @@ genres.forEach((genre) => {
 // Display books with search and filter
 function displayBooks(filteredBooks = books) {
   bookGrid.innerHTML = "";
-
+  
   if (filteredBooks.length === 0) {
     bookGrid.innerHTML = `
-      <div class="no-results">
+      <div class="no-results animate-fade-in">
         <h3>No books found</h3>
         <p>Try adjusting your search or filter criteria</p>
       </div>
     `;
     return;
   }
-
-  filteredBooks.forEach((book) => {
+  
+  filteredBooks.forEach((book, index) => {
     const card = document.createElement("div");
-    card.className = "book-card";
+    card.className = "book-card animate-scale-up";
+    card.style.transitionDelay = `${index * 0.1}s`;
     card.innerHTML = `
       <img src="${book.image}" alt="${book.title}">
       <div class="book-info">
@@ -162,8 +163,8 @@ function displayBooks(filteredBooks = books) {
     `;
     bookGrid.appendChild(card);
 
-    // Animate
-    setTimeout(() => card.classList.add("visible"), 100);
+    // Trigger animation
+    setTimeout(() => card.classList.add("visible"), 50);
   });
 }
 

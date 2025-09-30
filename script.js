@@ -10,23 +10,159 @@ document.querySelectorAll(".cta-button").forEach((button) => {
   });
 });
 
-// ===== Fade-In Sections on Scroll =====
-const fadeElements = document.querySelectorAll(
-  ".hero, .about, .projects, .contact"
-);
+// ===== ADVANCED SCROLL ANIMATIONS SYSTEM =====
+class ScrollAnimations {
+  constructor() {
+    this.animatedElements = new Set();
+    this.observer = null;
+    this.init();
+  }
 
-const fadeInOnScroll = () => {
-  const windowBottom = window.innerHeight + window.scrollY;
-  fadeElements.forEach((el) => {
-    const elTop = el.offsetTop + el.offsetHeight / 4;
-    if (windowBottom > elTop) {
-      el.classList.add("visible");
+  init() {
+    // Create intersection observer for better performance
+    this.observer = new IntersectionObserver(
+      (entries) => this.handleIntersection(entries),
+      {
+        threshold: 0.1,
+        rootMargin: "0px 0px -50px 0px"
+      }
+    );
+
+    // Observe all elements with animation classes
+    this.observeElements();
+    
+    // Add scroll listener for navbar effects
+    this.addScrollListeners();
+    
+    // Initial check for elements already in view
+    this.checkInitialElements();
+  }
+
+  observeElements() {
+    const selectors = [
+      '.animate-on-scroll',
+      '.animate-fade-in',
+      '.animate-slide-left',
+      '.animate-slide-right',
+      '.animate-scale-up',
+      '.animate-rotate-in',
+      '.animate-bounce-in',
+      '.project-card',
+      '.contact-form',
+      '.contact-info',
+      'section h2',
+      'section p'
+    ];
+
+    selectors.forEach(selector => {
+      const elements = document.querySelectorAll(selector);
+      elements.forEach(el => {
+        this.observer.observe(el);
+        this.animatedElements.add(el);
+      });
+    });
+  }
+
+  handleIntersection(entries) {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        const element = entry.target;
+        
+        // Add visible class with appropriate delay
+        this.animateElement(element);
+        
+        // Stop observing this element
+        this.observer.unobserve(element);
+      }
+    });
+  }
+
+  animateElement(element) {
+    // Add visible class
+    element.classList.add('visible');
+    
+    // Special handling for project cards with stagger
+    if (element.classList.contains('project-card')) {
+      const cards = document.querySelectorAll('.project-card');
+      const index = Array.from(cards).indexOf(element);
+      element.style.transitionDelay = `${index * 0.1}s`;
     }
-  });
+    
+    // Special handling for contact form elements
+    if (element.classList.contains('contact-info')) {
+      const contactForm = document.querySelector('.contact-form');
+      if (contactForm && !contactForm.classList.contains('visible')) {
+        setTimeout(() => {
+          contactForm.classList.add('visible');
+        }, 200);
+      }
+    }
+  }
+
+  addScrollListeners() {
+    let ticking = false;
+    
+    const updateNavbar = () => {
+      const navbar = document.querySelector('.navbar');
+      const scrolled = window.scrollY > 50;
+      
+      if (scrolled) {
+        navbar.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+      }
+      
+      ticking = false;
+    };
+
+    const requestTick = () => {
+      if (!ticking) {
+        requestAnimationFrame(updateNavbar);
+        ticking = true;
+      }
+    };
+
+    window.addEventListener('scroll', requestTick, { passive: true });
+  }
+
+  checkInitialElements() {
+    // Check if elements are already in view on page load
+    this.animatedElements.forEach(element => {
+      const rect = element.getBoundingClientRect();
+      const isInView = rect.top < window.innerHeight && rect.bottom > 0;
+      
+      if (isInView) {
+        this.animateElement(element);
+        this.observer.unobserve(element);
+      }
+    });
+  }
+
+  // Method to add new elements dynamically
+  addElement(element) {
+    if (element && !this.animatedElements.has(element)) {
+      this.observer.observe(element);
+      this.animatedElements.add(element);
+    }
+  }
+}
+
+// Initialize scroll animations
+const scrollAnimations = new ScrollAnimations();
+
+// ===== HERO SECTION SPECIAL ANIMATIONS =====
+const initHeroAnimations = () => {
+  const hero = document.querySelector('.hero');
+  if (hero) {
+    // Trigger hero animations immediately on load
+    setTimeout(() => {
+      hero.classList.add('visible');
+    }, 100);
+  }
 };
 
-window.addEventListener("scroll", fadeInOnScroll);
-window.addEventListener("load", fadeInOnScroll);
+// Initialize hero animations when DOM is loaded
+document.addEventListener('DOMContentLoaded', initHeroAnimations);
 
 // ===== Project Data (Dynamic) =====
 const projectsData = [
@@ -68,8 +204,8 @@ const renderProjects = () => {
     `;
     projectGrid.appendChild(card);
 
-    // Staggered fade-in
-    setTimeout(() => card.classList.add("visible"), index * 150);
+    // Add to scroll animations system
+    scrollAnimations.addElement(card);
   });
 };
 
@@ -103,63 +239,70 @@ class ThemeManager {
     this.themeToggle = document.getElementById("theme-toggle");
     this.themeIcon = this.themeToggle?.querySelector(".theme-icon");
     this.currentTheme = this.getStoredTheme() || this.getSystemTheme();
-    
+
     this.init();
   }
-  
+
   init() {
     // Apply initial theme
     this.applyTheme(this.currentTheme);
-    
+
     // Add event listener
     if (this.themeToggle) {
       this.themeToggle.addEventListener("click", () => this.toggleTheme());
     }
-    
+
     // Listen for system theme changes
-    window.matchMedia("(prefers-color-scheme: dark)").addEventListener("change", (e) => {
-      if (!this.getStoredTheme()) {
-        this.currentTheme = e.matches ? "dark" : "light";
-        this.applyTheme(this.currentTheme);
-      }
-    });
+    window
+      .matchMedia("(prefers-color-scheme: dark)")
+      .addEventListener("change", (e) => {
+        if (!this.getStoredTheme()) {
+          this.currentTheme = e.matches ? "dark" : "light";
+          this.applyTheme(this.currentTheme);
+        }
+      });
   }
-  
+
   getSystemTheme() {
-    return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
+    return window.matchMedia("(prefers-color-scheme: dark)").matches
+      ? "dark"
+      : "light";
   }
-  
+
   getStoredTheme() {
     return localStorage.getItem("theme");
   }
-  
+
   storeTheme(theme) {
     localStorage.setItem("theme", theme);
   }
-  
+
   toggleTheme() {
     this.currentTheme = this.currentTheme === "dark" ? "light" : "dark";
     this.applyTheme(this.currentTheme);
     this.storeTheme(this.currentTheme);
   }
-  
+
   applyTheme(theme) {
     // Set data attribute on document
     document.documentElement.setAttribute("data-theme", theme);
-    
+
     // Update toggle button
     if (this.themeToggle) {
       this.themeToggle.setAttribute("data-theme", theme);
     }
-    
+
     // Update icon
     if (this.themeIcon) {
       this.themeIcon.textContent = theme === "dark" ? "☀️" : "🌙";
     }
-    
+
     // Update aria-label
     if (this.themeToggle) {
-      this.themeToggle.setAttribute("aria-label", `Switch to ${theme === "dark" ? "light" : "dark"} theme`);
+      this.themeToggle.setAttribute(
+        "aria-label",
+        `Switch to ${theme === "dark" ? "light" : "dark"} theme`
+      );
     }
   }
 }

@@ -8,6 +8,7 @@
     <!-- CSS Modular -->
     <link rel="stylesheet" href="styles/style-theme.css" />
     <link rel="stylesheet" href="styles/style-common.css" />
+    <link rel="stylesheet" href="styles/style-animations.css" />
     <link rel="stylesheet" href="styles/style-hero.css" />
     <link rel="stylesheet" href="styles/style-about.css" />
     <link rel="stylesheet" href="styles/style-projects.css" />
@@ -37,26 +38,26 @@
     <main id="maincontent">
       <!-- HERO SECTION -->
       <section id="hero" class="hero">
-        <h2>Welcome to My Portfolio</h2>
-        <p>
+        <h2 class="animate-hero-title">Welcome to My Portfolio</h2>
+        <p class="animate-hero-subtitle">
           Here you can explore my projects and experience in web development.
         </p>
-        <a href="#projects-anchor" class="cta-button">Explore Projects</a>
+        <a href="#projects-anchor" class="cta-button animate-hero-button">Explore Projects</a>
       </section>
 
       <!-- ABOUT SECTION -->
-      <section id="about" class="about">
+      <section id="about" class="about animate-fade-in">
         <div class="anchor-offset" id="about-anchor"></div>
         <h2>About Me</h2>
         <p>
-          I’m a Front-End Developer passionate about creating responsive,
+          I'm a Front-End Developer passionate about creating responsive,
           high-performance web applications. I enjoy working with both front-end
           and back-end technologies to become a fullstack developer.
         </p>
       </section>
 
       <!-- PROJECTS SECTION -->
-      <section id="projects" class="projects">
+      <section id="projects" class="projects animate-slide-right">
         <div class="anchor-offset" id="projects-anchor"></div>
         <h2>Projects</h2>
         <div class="project-grid">
@@ -65,7 +66,7 @@
       </section>
 
       <!-- CONTACT SECTION -->
-      <section id="contact" class="contact">
+      <section id="contact" class="contact animate-slide-left">
         <div class="anchor-offset" id="contact-anchor"></div>
         <h2>Get In Touch</h2>
         <p>I'm always interested in new opportunities and exciting projects.</p>
